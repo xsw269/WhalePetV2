@@ -1,6 +1,43 @@
 <!DOCTYPE html>
 <html>
-<body style="margin:0; background:transparent; overflow:hidden;">
-  < img src="1792945775219.png" style="width: 150px; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+<head>
+<meta charset="UTF-8">
+<style>
+  body { margin: 0; padding: 0; height: 100vh; background: transparent; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+  .fish-container { width: 150px; height: 150px; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .tail { transform-origin: 40px 100px; animation: wag 1.5s ease-in-out infinite; }
+  @keyframes wag { 0%, 100% { transform: rotate(-10deg); } 50% { transform: rotate(20deg); } }
+  .eye { transform-origin: center; animation: blink 4s infinite; }
+  @keyframes blink { 0%, 90%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+  .bubble { animation: rise 3s linear infinite; opacity: 0; }
+  @keyframes rise { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-50px) scale(1.5); opacity: 0; } }
+</style>
+</head>
+<body>
+  <div class="fish-container">
+    <svg viewBox="0 0 200 200">
+      <!-- 尾巴 -->
+      <path class="tail" d="M 50 100 Q 10 60 10 100 Q 10 140 50 100 Z" fill="#38bdf8"/>
+      <!-- 身体 -->
+      <ellipse cx="110" cy="100" rx="60" ry="45" fill="#7dd3fc"/>
+      <ellipse cx="110" cy="110" rx="50" ry="30" fill="#e0f2fe"/>
+      <!-- 鱼鳍 -->
+      <path d="M 100 55 Q 120 30 130 60 Z" fill="#0ea5e9"/>
+      <path d="M 100 145 Q 120 170 130 140 Z" fill="#0ea5e9"/>
+      <!-- 眼睛 -->
+      <g class="eye">
+        <circle cx="140" cy="90" r="12" fill="#fff"/>
+        <circle cx="144" cy="90" r="6" fill="#0f172a"/>
+        <circle cx="146" cy="88" r="2" fill="#fff"/>
+      </g>
+      <!-- 腮红和嘴巴 -->
+      <ellipse cx="150" cy="110" rx="8" ry="4" fill="#fb7185" opacity="0.6"/>
+      <path d="M 160 100 Q 165 105 160 110" stroke="#0f172a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- 泡泡 -->
+      <circle class="bubble" cx="170" cy="80" r="5" fill="none" stroke="#bae6fd" stroke-width="2"/>
+      <circle class="bubble" cx="165" cy="70" r="3" fill="none" stroke="#bae6fd" stroke-width="2" style="animation-delay: 1.5s;"/>
+    </svg>
+  </div>
 </body>
 </html>
