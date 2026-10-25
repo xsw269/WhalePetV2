@@ -5,7 +5,6 @@ import android.app.*
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PixelFormat
-import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import android.view.Gravity
@@ -13,6 +12,7 @@ import android.view.MotionEvent
 import android.view.WindowManager
 import android.webkit.WebView
 import android.widget.FrameLayout
+import android.widget.Toast
 import kotlin.math.abs
 
 class PetService : Service() {
@@ -68,7 +68,7 @@ class PetService : Service() {
                 }
                 MotionEvent.ACTION_UP -> {
                     if (!dragging) {
-                        try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://chat.deepseek.com")).apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }) } catch (_: Exception) {}
+                        Toast.makeText(this@PetService, "别戳我啦~", Toast.LENGTH_SHORT).show()
                     }; true
                 }
                 else -> false
@@ -76,6 +76,14 @@ class PetService : Service() {
         }
         windowManager.addView(petView, params)
     }
-    override fun onDestroy() { super.onDestroy(); if (::petView.isInitialized) { windowManager.removeView(petView); webView.destroy() } }
+    
+    override fun onDestroy() { 
+        super.onDestroy()
+        if (::petView.isInitialized) { 
+            windowManager.removeView(petView)
+            webView.destroy() 
+        } 
+    }
+    
     override fun onBind(intent: Intent?): IBinder? = null
 }
